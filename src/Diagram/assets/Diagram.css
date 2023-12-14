@@ -1,0 +1,29 @@
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.react-flow__attribution {
+  display: none;
+  height: 0;
+  visibility: 0;
+  width: 0;
+}
+
+.react-flow__controls.react-flow__panel {
+  bottom: 25px;
+}
+
+.react-flow__minimap.react-flow__panel {
+  right: 50px;
+}
+
+.diagram__property-panel {
+  background-color: white;
+  text-wrap: wrap;
+  word-break: break-all;
+  max-width: 200px;
+}
