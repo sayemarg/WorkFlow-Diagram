@@ -7,6 +7,8 @@ export const getNodeColor = (node: Node) => {
 			return NodeColor.Input;
 		case NodeType.Output:
 			return NodeColor.Output;
+		case NodeType.Condition:
+			return NodeColor.Condition;
 		default:
 			return NodeColor.Default;
 	}

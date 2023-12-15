@@ -11,6 +11,7 @@ import ReactFlow, {
 } from "reactflow";
 import NodePropertyPanel from "./components/NodePropertyPanel";
 import ToolbarPanel from "./components/ToolbarPanel";
+import customNodeTypes from "./nodeTypes";
 import { INITIAL_EDGES, INITIAL_NODES } from "./meta/constants";
 import { getNodeColor } from "./meta/utils";
 import { useCallback } from "react";
@@ -36,6 +37,7 @@ const Diagram = () => {
 				edges={edges}
 				onEdgesChange={onEdgesChange}
 				onConnect={onConnect}
+				nodeTypes={customNodeTypes}
 				defaultEdgeOptions={{ deletable: false }}
 				style={{ backgroundColor: '#D3D2E5' }}
         // TODO: Add help panel to show this keys

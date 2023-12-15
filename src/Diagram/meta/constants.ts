@@ -29,6 +29,12 @@ export const INITIAL_NODES: Node[] = [
 		position: { x: -29.5, y: 319.5 },
 		style: { backgroundColor: NodeColor.Output },
 	},
+	{
+		id: "5",
+		type: NodeType.Condition,
+		data: { label: "5" },
+		position: { x: 300, y: 319.5 },
+	},
 ];
 
 export const INITIAL_EDGES: Edge[] = [
