@@ -13,12 +13,20 @@
 	width: 0;
 }
 
-.react-flow__controls.react-flow__panel {
-	bottom: 25px;
+.react-flow__panel.react-flow__controls {
+	display: flex;
+	flex-direction: row-reverse;
 }
 
-.react-flow__minimap.react-flow__panel {
-	right: 50px;
+.react-flow__controls-button {
+	border-right: 1px solid rgba(0, 0, 0, 0.08);
+	width: 24px;
+	height: 24px;
+}
+
+.react-flow__controls-button svg {
+	max-width: 20px;
+	max-height: 20px;
 }
 
 .diagram__property-panel {
@@ -39,10 +47,10 @@
 
 .react-flow__node-condition .content {
 	position: relative;
-  color: white;
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
+	color: white;
+	max-width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .react-flow__node-condition .react-flow__handle-top {
@@ -54,7 +62,7 @@
 }
 
 .react-flow__node-condition::before {
-	background-color: #FA9F42;
+	background-color: #fa9f42;
 	border-bottom-left-radius: 2px;
 	border-top-right-radius: 2px;
 	bottom: 0;
