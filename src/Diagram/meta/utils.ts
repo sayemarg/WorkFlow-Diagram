@@ -1,5 +1,5 @@
-import { Edge, Node } from "reactflow";
-import { NodeColor, NodeType, ToolbarNode } from "./types";
+import { Edge, Node, ReactFlowState } from "reactflow";
+import { NodeColor, NodeType } from "./types";
 
 export const getNodeColor = (node: Node) => {
 	switch (node.type) {
@@ -14,10 +14,14 @@ export const getNodeColor = (node: Node) => {
 	}
 };
 
-export const getSelectedItems = (item: Node | Edge) => item.selected;
-
-export const filterToolsByLabel = (serchKey: string) => (tool: ToolbarNode) => {
-	return tool.label.toLowerCase().includes(serchKey);
+export const isInteractiveSelector = (store: ReactFlowState) => {
+	return (
+		store.nodesDraggable ||
+		store.nodesConnectable ||
+		store.elementsSelectable
+	);
 };
+
+export const getSelectedItems = (item: Node | Edge) => item.selected;
 
 export const getNewNodeId = () => `${Math.random()}_${Date.now()}`;

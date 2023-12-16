@@ -1,16 +1,20 @@
-import "../assets/Toolbar.css";
-import { DRAG_EVENT_DATA_TYPE } from "../meta/constants";
-import { DragEvent, useCallback, useMemo, useState } from "react";
-import { ToolbarNode } from "../meta/types";
-import { filterToolsByLabel } from "../meta/utils";
-import { toolbarNodes } from "../nodeTypes";
+import "./assets/Toolbar.css";
+import ToolsList from "./components/ToolsList";
+import { ToolbarNode } from "./meta/types";
+import { filterToolsByLabel } from "./meta/utils";
+import { isInteractiveSelector } from "../Diagram/meta/utils";
+import { toolbarNodes } from "./meta/constants";
+import { useMemo, useState } from "react";
+import { useStore } from "reactflow";
 
 const ToolbarPanel = () => {
+	const isInteractive = useStore(isInteractiveSelector);
+
 	const toolTypeList = useMemo<string[]>(() => {
 		return Object.keys(toolbarNodes);
 	}, []);
 
-	const [selectedToolType, setSelectedToolType] = useState<string>(toolTypeList[0]);
+	const [selectedToolType, setSelectedToolType] = useState(toolTypeList[0]);
 
 	const [searchKey, setSearchKey] = useState<string>("");
 
@@ -27,13 +31,7 @@ const ToolbarPanel = () => {
 		);
 	}, [selectedTools, searchKey]);
 
-	const handleOnDragStart = useCallback(
-		(event: DragEvent, tool: ToolbarNode) => {
-			event.dataTransfer.setData(DRAG_EVENT_DATA_TYPE, tool.type);
-			event.dataTransfer.effectAllowed = "move";
-		},
-		[]
-	);
+	if (!isInteractive) return null;
 
 	return (
 		<div className="toolbar">
@@ -54,17 +52,7 @@ const ToolbarPanel = () => {
 				placeholder="Search tools..."
 			/>
 
-			<ul className="toolbar__list">
-				{filteredToolsBySearchKey.map((tool: ToolbarNode) => (
-					<li
-						className="toolbar__list-item"
-						onDragStart={(event: DragEvent) => handleOnDragStart(event, tool)}
-						draggable
-					>
-						{tool.icon} {tool.label}
-					</li>
-				))}
-			</ul>
+			<ToolsList tools={filteredToolsBySearchKey} />
 		</div>
 	);
 };

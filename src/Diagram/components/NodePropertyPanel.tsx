@@ -1,9 +1,13 @@
 import useSelection from "../hooks/useSelection";
 import { Node, Panel, useStore } from "reactflow";
+import { isInteractiveSelector } from "../meta/utils";
 import { useMemo } from "react";
 
 const NodePropertyPanel = () => {
-	const userSelectionActive = useStore((store) => store.userSelectionActive);
+	const { userSelectionActive, isInteractive } = useStore((store) => ({
+		userSelectionActive: store.userSelectionActive,
+		isInteractive: isInteractiveSelector(store),
+	}));
 
 	const { selectedNodes } = useSelection();
 
@@ -12,6 +16,8 @@ const NodePropertyPanel = () => {
 
 		return selectedNodes[0];
 	}, [selectedNodes]);
+
+	if (!isInteractive) return null;
 
 	return (
 		<Panel position="top-right">

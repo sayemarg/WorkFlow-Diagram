@@ -22,10 +22,10 @@ export enum EdgeType {
 	Straight = "straight",
 }
 
-export interface ToolbarNode {
-	label: string;
-	type: NodeType;
-	icon: React.ReactNode;
+export interface DiagramProps {
+	deafultNodes?: Node[];
+	defaultEdges?: Edge[];
+	canBeEdited?: boolean;
 }
 
 export interface ActionContextProviderProps {

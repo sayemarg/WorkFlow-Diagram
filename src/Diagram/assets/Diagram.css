@@ -64,6 +64,7 @@ body {
 	max-width: 100%;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .react-flow__node-condition .react-flow__handle-top {

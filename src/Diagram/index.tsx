@@ -10,24 +10,25 @@ import ReactFlow, {
 	useEdgesState,
 	useNodesState,
 } from "reactflow";
-import {
-	DRAG_EVENT_DATA_TYPE,
-	INITIAL_EDGES,
-	INITIAL_NODES,
-} from "./meta/constants";
 import ActionBar from "./components/ActionBar";
 import ActionContextProvider from "./components/ActionContextProvider";
 import NodePropertyPanel from "./components/NodePropertyPanel";
-import ToolbarPanel from "./components/ToolbarPanel";
+import ToolbarPanel from "../Toolbar";
 import customNodeTypes from "./nodeTypes";
+import { DRAGGED_NODE_LABEL, DRAGGED_NODE_TYPE } from "./meta/constants";
+import { DiagramProps } from "./meta/types";
 import { DragEvent, useCallback, useRef } from "react";
 import { getNewNodeId, getNodeColor } from "./meta/utils";
 
-const Diagram = () => {
+const Diagram = ({
+	deafultNodes = [],
+	defaultEdges = [],
+	canBeEdited = true,
+}: DiagramProps) => {
 	const reactFlowInstanceRef = useRef<ReactFlowInstance>();
 
-	const [nodes, setNodes, onNodesChange] = useNodesState(INITIAL_NODES);
-	const [edges, setEdges, onEdgesChange] = useEdgesState(INITIAL_EDGES);
+	const [nodes, setNodes, onNodesChange] = useNodesState(deafultNodes);
+	const [edges, setEdges, onEdgesChange] = useEdgesState(defaultEdges);
 
 	const onConnect = useCallback(
 		(connection: Connection) => {
@@ -51,7 +52,7 @@ const Diagram = () => {
 		(event: DragEvent) => {
 			event.preventDefault();
 
-			const type = event.dataTransfer.getData(DRAG_EVENT_DATA_TYPE);
+			const type = event.dataTransfer.getData(DRAGGED_NODE_TYPE);
 
 			if (!type || !reactFlowInstanceRef.current) return;
 
@@ -60,23 +61,25 @@ const Diagram = () => {
 				y: event.clientY,
 			});
 
-			const newNode = {
-				id: getNewNodeId(),
-				type,
-				position,
-				data: { label: `${type} node` },
-			};
+			const label = event.dataTransfer.getData(DRAGGED_NODE_LABEL);
 
-			setNodes((nds) => nds.concat(newNode));
+			setNodes((nds) => {
+				return nds.concat({
+					type,
+					position,
+					id: getNewNodeId(),
+					data: { label: label ?? `${type} node` },
+				});
+			});
 		},
 		[setNodes]
 	);
 
 	return (
 		<div className="container">
-			<ToolbarPanel />
-
 			<ReactFlowProvider>
+				<ToolbarPanel />
+
 				<div className="diagram">
 					<ReactFlow
 						onInit={handleOnInit}
@@ -94,6 +97,9 @@ const Diagram = () => {
 						deleteKeyCode="Delete"
 						selectionKeyCode="Shift"
 						multiSelectionKeyCode="Control"
+						nodesDraggable={canBeEdited}
+						nodesConnectable={canBeEdited}
+						elementsSelectable={canBeEdited}
 						fitView
 					>
 						<Background />
