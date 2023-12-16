@@ -1,6 +1,7 @@
+import SvgIcon from "../../svg";
 import useSelection from "../hooks/useSelection";
 import { Controls } from "reactflow";
-import { PasteSvg, CopySvg, CutSvg, UndoSvg, RedoSvg } from "../svg";
+import { IconType } from "../../svg/meta/types";
 
 const ActionBar = () => {
 	const { selectedNodes } = useSelection();
@@ -15,7 +16,7 @@ const ActionBar = () => {
 				title="paste"
 				aria-label="paste"
 			>
-				<PasteSvg />
+				<SvgIcon type={IconType.Paste} />
 			</button>
 
 			<button
@@ -25,7 +26,7 @@ const ActionBar = () => {
 				aria-label="copy"
 				disabled={hasNotSelectedNode}
 			>
-				<CopySvg />
+				<SvgIcon type={IconType.Copy} />
 			</button>
 
 			<button
@@ -35,7 +36,7 @@ const ActionBar = () => {
 				aria-label="cut"
 				disabled={hasNotSelectedNode}
 			>
-				<CutSvg />
+				<SvgIcon type={IconType.Cut} />
 			</button>
 
 			<button
@@ -44,7 +45,7 @@ const ActionBar = () => {
 				title="redo"
 				aria-label="redo"
 			>
-				<RedoSvg />
+				<SvgIcon type={IconType.Redo} />
 			</button>
 
 			<button
@@ -53,7 +54,7 @@ const ActionBar = () => {
 				title="undo"
 				aria-label="undo"
 			>
-				<UndoSvg />
+				<SvgIcon type={IconType.Undo} />
 			</button>
 		</Controls>
 	);

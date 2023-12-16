@@ -1,6 +1,6 @@
-import SelectionContext from "../context/SelectionContext";
+import ActionContext from "../context/ActionContext";
 import { useContext } from "react";
 
-const useSelection = () => useContext(SelectionContext);
+const useSelection = () => useContext(ActionContext);
 
 export default useSelection;

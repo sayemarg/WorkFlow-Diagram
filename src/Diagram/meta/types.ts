@@ -1,7 +1,11 @@
+import { Edge, Node } from "reactflow";
+import { SetStateAction } from "react";
+
 export enum NodeType {
 	Input = "input",
 	Output = "output",
 	Condition = "condition",
+	Default = "default",
 }
 
 export enum NodeColor {
@@ -16,4 +20,18 @@ export enum EdgeType {
 	Smoothstep = "smoothstep",
 	Step = "step",
 	Straight = "straight",
+}
+
+export interface ToolbarNode {
+	label: string;
+	type: NodeType;
+	icon: React.ReactNode;
+}
+
+export interface ActionContextProviderProps {
+	nodes: Node[];
+	setNodes: (action: SetStateAction<Node[]>) => void;
+	edges: Edge[];
+	setEdges: (action: SetStateAction<Edge[]>) => void;
+	children: React.ReactNode;
 }

@@ -1,0 +1,69 @@
+.container > .toolbar {
+	background-color: white;
+	height: 100%;
+	left: 0;
+	padding: 20px;
+	position: absolute;
+	top: 0;
+	transition: width 0.5s ease;
+	width: 20%;
+	z-index: 10;
+	overflow-y: auto;
+}
+
+.toolbar__type-select,
+.toolbar__tools-search {
+	border-radius: 5px;
+	outline: none;
+	padding: 10px;
+	width: 100%;
+}
+
+.toolbar__tools-search {
+	border-width: 1px;
+	margin-top: 1em;
+}
+
+.toolbar__list {
+	list-style: none;
+	padding: 0;
+}
+
+.toolbar__list-item {
+	align-items: center;
+	border-radius: 5px;
+	box-shadow: 0 0 2px rgba(0, 0, 0);
+	cursor: pointer;
+	display: flex;
+	padding: 10px 20px;
+}
+
+.toolbar__list-item:not(:first-child) {
+	margin-top: 1em;
+}
+
+.toolbar__list-item > svg {
+	margin-right: 10px;
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+	.container > .toolbar {
+		width: 30%;
+	}
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+	.container > .toolbar {
+		width: 40%;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.container > .toolbar {
+		width: 100%;
+		height: 50%;
+		top: unset;
+		bottom: 0;
+		transition: bottom;
+	}
+}

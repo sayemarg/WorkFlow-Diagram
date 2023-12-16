@@ -1,9 +1,12 @@
 import { Edge, Node } from "reactflow";
 import { EdgeType, NodeColor, NodeType } from "./types";
 
+export const DRAG_EVENT_DATA_TYPE = "application/reactflow";
+
 export const INITIAL_NODES: Node[] = [
 	{
 		id: "1",
+		type: NodeType.Default,
 		data: { label: "1" },
 		position: { x: 104.5, y: 124.5 },
 		style: { backgroundColor: NodeColor.Default },
